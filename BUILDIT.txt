@@ -1,0 +1,37 @@
+Fresh install of Ubuntu 24.04.1 LTS
+https://ubuntu.com/download/desktop
+
+Follow instructions on Radxa Github
+https://github.com/radxa/meta-rockchip
+
+Create a folder ~/projects/rock2a
+
+open terminal:
+sudo apt update
+sudo apt install gawk wget git diffstat unzip texinfo gcc build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev pylint xterm python3-subunit mesa-common-dev zstd liblz4-tool
+
+(NOTE libegl1-mesa was not found...continued without it)
+
+mkdir yocto; cd yocto
+git clone git://git.openembedded.org/bitbake -b master
+git clone git://git.openembedded.org/openembedded-core -b scarthgap
+git clone git://git.yoctoproject.org/meta-arm -b scarthgap
+git clone git://git.openembedded.org/meta-openembedded -b scarthgap
+
+(NOTE failure with git clone git@github.com:radxa/meta-rockchip.git -b scarthgap)
+instead, used:
+git clone https://github.com/radxa/meta-rockchip.git -b scarthgap
+
+git clone git://git.yoctoproject.org/meta-virtualization -b scarthgap
+
+source openembedded-core/oe-init-build-env
+
+Updated files from https://github.com/elockman/rock2a-patches
+(Paths for each file are provided in the README)
+
+sudo chmod -R 755 ~/projects/rock2a/
+
+MACHINE=rock-2a bitbake core-image-minimal
+
+
+
